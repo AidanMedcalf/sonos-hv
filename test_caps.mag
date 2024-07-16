@@ -1,0 +1,63 @@
+magic
+tech sky130A
+timestamp 1715964334
+<< metal3 >>
+rect -50 300 500 350
+rect -50 0 200 300
+rect 250 0 500 300
+rect -50 -50 500 0
+<< via3 >>
+rect 200 0 250 300
+<< mimcap >>
+rect 0 290 100 300
+rect 0 210 10 290
+rect 90 210 100 290
+rect 0 200 100 210
+rect 350 290 450 300
+rect 350 210 360 290
+rect 440 210 450 290
+rect 350 200 450 210
+rect 0 90 100 100
+rect 0 10 10 90
+rect 90 10 100 90
+rect 0 0 100 10
+rect 350 90 450 100
+rect 350 10 360 90
+rect 440 10 450 90
+rect 350 0 450 10
+<< mimcapcontact >>
+rect 10 210 90 290
+rect 360 210 440 290
+rect 10 10 90 90
+rect 360 10 440 90
+<< metal4 >>
+rect -200 100 -100 500
+rect 0 290 100 500
+rect 200 305 250 500
+rect 0 210 10 290
+rect 90 210 100 290
+rect 0 200 100 210
+rect 195 300 255 305
+rect -200 90 100 100
+rect -200 10 10 90
+rect 90 10 100 90
+rect -200 0 100 10
+rect 195 0 200 300
+rect 250 0 255 300
+rect 350 290 450 500
+rect 350 210 360 290
+rect 440 210 450 290
+rect 350 200 450 210
+rect 550 100 650 500
+rect 350 90 650 100
+rect 350 10 360 90
+rect 440 10 650 90
+rect 350 0 650 10
+rect 195 -5 255 0
+<< labels >>
+flabel metal3 200 400 250 500 0 FreeSans 400 0 0 0 vbot
+flabel metal3 0 400 100 500 0 FreeSans 200 0 0 0 vcap00
+flabel metal3 -200 400 -100 500 0 FreeSans 200 0 0 0 vcap01
+flabel metal3 350 400 450 500 0 FreeSans 200 0 0 0 vcap10
+flabel metal3 550 400 650 500 0 FreeSans 200 0 0 0 vcap11
+<< end >>

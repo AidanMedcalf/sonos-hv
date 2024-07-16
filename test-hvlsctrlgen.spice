@@ -1,0 +1,55 @@
+** sch_path: /home/amedcalf/projects/sky130_sims/nisoc-hvswitch/test-hvlsctrlgen.sch
+
+.include /home/amedcalf/open-asic/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+
+**.subckt test-hvlsctrlgen
+x1 EN CN S CP GND GND VDD VDD hvlsctrlgen
+VS S GND dc 0 pulse(0 1.8 2n 10p 10p 5n 10n)
+VEN EN GND dc 0 pulse(0 1.8 20n 100p 100p 24n 49n)
+VDD VDD GND 1.8
+**** begin user architecture code
+
+.param mc_mm_switch=0
+.param mc_pr_switch=0
+.include /home/amedcalf/open-asic/pdk/sky130A/libs.tech/ngspice/corners/tt.spice
+.include /home/amedcalf/open-asic/pdk/sky130A/libs.tech/ngspice/r+c/res_typical__cap_typical.spice
+.include /home/amedcalf/open-asic/pdk/sky130A/libs.tech/ngspice/r+c/res_typical__cap_typical__lin.spice
+.include /home/amedcalf/open-asic/pdk/sky130A/libs.tech/ngspice/corners/tt/specialized_cells.spice
+
+
+
+
+.param VDD=1.8
+.option savecurrents
+.control
+  save all
+  op
+  remzerovec
+  write test-hvlsctrlgen.raw
+  set appendwrite
+  tran 10p 100n
+  remzerovec
+  write test-hvlsctrlgen.raw
+.endc
+
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  hvlsctrlgen.sym # of pins=4
+** sym_path: /home/amedcalf/projects/sky130_sims/nisoc-hvswitch/hvlsctrlgen.sym
+** sch_path: /home/amedcalf/projects/sky130_sims/nisoc-hvswitch/hvlsctrlgen.sch
+.subckt hvlsctrlgen EN CP S CN VGND VNB VPB VPWR
+*.ipin S
+*.ipin EN
+*.opin CP
+*.opin CN
+x1 SDI EN S VGND VNB VPB VPWR CP sky130_fd_sc_hd__and3b_1
+x2 S EN SDI VGND VNB VPB VPWR CN sky130_fd_sc_hd__and3b_1
+x3 net1 VGND VNB VPB VPWR SDI sky130_fd_sc_hd__inv_1
+x4 S VGND VNB VPB VPWR net1 sky130_fd_sc_hd__dlygate4sd1_1
+.ends
+
+.GLOBAL GND
+.end

@@ -1,0 +1,70 @@
+** sch_path: /home/amedcalf/projects/sky130_sims/nisoc-hvswitch/test-hvswitch_driver.sch
+**.subckt test-hvswitch_driver
+x1 vhh vdd en_vdd en_hh out vint en_ll vll vblk_vdd hvswitch_driver
+vhh vhh GND {VHH}
+vint vint GND {VINT}
+vll vll GND {VLL}
+ven_ll en_ll GND {VLL} pwl(0 {VLL} 9n {VLL} 10n {VINT} 19n {VINT} 20n {VLL})
+vdd vdd GND {VDD}
+ven_hh en_hh GND {VHH} pwl(0 {VHH} 59n {VHH} 60n {VINT} 69n {VINT} 70n {VHH})
+ven_vdd en_vdd GND {VSS} pwl(0 {VSS} 29n {VSS} 30n {VDD} 49n {VDD} 50n {VSS} 79n {VSS} 80n {VDD} 99n {VDD} 100n {VSS})
+R1 out GND 1T m=1
+vblk_vdd vblk_vdd GND {VINT} pwl(0 {VINT} 9n {VINT} 10n {VLL} 19n {VLL} 20n {VINT} 29n {VINT} 30n {VINT} 49n {VINT} 50n {VINT} 59n
++ {VINT} 60n {VINT} 69n {VINT} 70n {VINT} 79n {VINT} 80n {VINT} 99n {VINT} 100n {VINT})
+**** begin user architecture code
+.lib /home/amedcalf/open-asic/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+
+
+.param VLL=-3.8
+.param VDD=1.8
+.param VSS=0
+.param VLH=0
+.param VHH=6.7
+.param VINT={(VHH+VLL)/2}
+.option savecurrents
+.control
+  save all
+  op
+  remzerovec
+  write test-hvswitch_driver.raw
+  set appendwrite
+  tran 10p 120n
+  remzerovec
+  write test-hvswitch_driver.raw
+.endc
+
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  hvswitch_driver.sym # of pins=9
+** sym_path: /home/amedcalf/projects/sky130_sims/nisoc-hvswitch/hvswitch_driver.sym
+** sch_path: /home/amedcalf/projects/sky130_sims/nisoc-hvswitch/hvswitch_driver.sch
+.subckt hvswitch_driver vhh vdd en_vdd en_hh out vint en_ll vll vblk_vdd
+*.ipin vhh
+*.ipin vll
+*.ipin vint
+*.ipin en_hh
+*.ipin en_ll
+*.opin out
+*.ipin vdd
+*.ipin en_vdd
+*.ipin vblk_vdd
+XM3 llint en_ll vll vll sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM1 hhint en_hh vhh vhh sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM2 out vint hhint vhh sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM4 out vint llint vll sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM5 ddint en_vdd vdd vll sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM6 out vblk_vdd ddint vll sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+
+.GLOBAL GND
+.end

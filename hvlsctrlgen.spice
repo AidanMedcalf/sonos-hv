@@ -1,0 +1,12 @@
+** sch_path: /home/amedcalf/projects/sky130_sims/nisoc-hvswitch/hvlsctrlgen.sch
+**.subckt hvlsctrlgen S EN CP CN
+*.ipin S
+*.ipin EN
+*.opin CP
+*.opin CN
+x1 SDI EN S VGND VNB VPB VPWR CP sky130_fd_sc_hd__and3b_1
+x2 S EN SDI VGND VNB VPB VPWR CN sky130_fd_sc_hd__and3b_1
+x3 net1 VGND VNB VPB VPWR SDI sky130_fd_sc_hd__inv_1
+x4 S VGND VNB VPB VPWR net1 sky130_fd_sc_hd__dlygate4sd1_1
+**.ends
+.end

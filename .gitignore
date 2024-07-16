@@ -1,0 +1,4 @@
+*.raw
+*.ext*
+*.sim
+*.nodes

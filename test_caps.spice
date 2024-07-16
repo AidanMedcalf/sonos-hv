@@ -1,0 +1,17 @@
+* NGSPICE file created from test_caps.ext - technology: sky130A
+
+X0 c01top# cbot# sky130_fd_pr__cap_mim_m3_1 l=1 w=1
+X1 c00top# cbot# sky130_fd_pr__cap_mim_m3_1 l=1 w=1
+X2 c10top# cbot# sky130_fd_pr__cap_mim_m3_1 l=1 w=1
+X3 c11top# cbot# sky130_fd_pr__cap_mim_m3_1 l=1 w=1
+C0 c11top# cbot# 0.502199f
+C1 c10top# c11top# 0.23949f
+C2 c00top# cbot# 0.502156f
+C3 c01top# c00top# 0.23949f
+C4 c10top# cbot# 0.502156f
+C5 c01top# cbot# 0.502199f
+C6 c11top# VSUBS 0.416263f $ **FLOATING
+C7 c01top# VSUBS 0.416263f $ **FLOATING
+C8 c10top# VSUBS 0.063898f $ **FLOATING
+C9 c00top# VSUBS 0.063898f $ **FLOATING
+C10 cbot# VSUBS 1.11774f $ **FLOATING

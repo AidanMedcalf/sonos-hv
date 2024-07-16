@@ -1,0 +1,29 @@
+v {xschem version=3.4.0 file_version=1.2
+}
+G {}
+K {type=subcircuit
+format="@name @pinlist @VGND @VNB @VPB @VPWR @symname"
+template="name=x1 VGND=VGND VNB=VNB VPB=VPB VPWR=VPWR"
+extra="VGND VNB VPB VPWR"
+extra_pinnumber="4 5 6 7"}
+V {}
+S {}
+E {}
+L 4 -80 -20 80 -20 {}
+L 4 -80 20 80 20 {}
+L 4 -80 -20 -80 20 {}
+L 4 80 -20 80 20 {}
+L 4 -100 -10 -80 -10 {}
+L 4 80 -10 100 -10 {}
+L 4 -100 10 -80 10 {}
+L 4 80 10 100 10 {}
+B 5 -102.5 -12.5 -97.5 -7.5 {name=EN dir=in}
+B 5 97.5 -12.5 102.5 -7.5 {name=CP dir=out}
+B 5 -102.5 7.5 -97.5 12.5 {name=S dir=in}
+B 5 97.5 7.5 102.5 12.5 {name=CN dir=out}
+T {@symname} -44.5 -6 0 0 0.3 0.3 {}
+T {@name} 85 -32 0 0 0.2 0.2 {}
+T {EN} -75 -14 0 0 0.2 0.2 {}
+T {CP} 75 -14 0 1 0.2 0.2 {}
+T {S} -75 6 0 0 0.2 0.2 {}
+T {CN} 75 6 0 1 0.2 0.2 {}

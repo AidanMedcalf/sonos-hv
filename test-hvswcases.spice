@@ -1,0 +1,78 @@
+** sch_path: /home/amedcalf/projects/sky130_sims/nisoc-hvswitch/test-hvswcases.sch
+**.subckt test-hvswcases
+vhh vhh GND {VHH}
+vint vint GND {VINT}
+vll vll GND {VLL}
+vb1 b1 GND {VINT}
+vdd vdd GND {VDD}
+va1 a1 GND {VSS} pwl(0 {VSS} 10n {VSS} 10.1n {VDD})
+XM1A c1 a1 vss vll sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM1B o1 b1 c1 vll sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+R1 GND o1 1T m=1
+vss vss GND {VSS}
+vb2 b2 GND {VLL} pwl(0 {VLL} 10n {VLL} 10.1n {VINT})
+va2 a2 GND {VSS} pwl(0 {VSS} 10n {VSS} 10.1n {VDD})
+XM2A c2 a2 vss vll sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM2B o2 b2 c2 vll sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+R2 GND o2 1T m=1
+C1 o1 GND 10f m=1
+C2 o2 GND 10f m=1
+vb3 b3 GND {VSS} pwl(0 {VSS} 10n {VSS} 10.1n {VINT})
+va3 a3 GND {VSS} pwl(0 {VSS} 10n {VSS} 10.1n {VDD})
+XM3A c3 a3 vss vll sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM3B o3 b3 c3 vll sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+R3 GND o3 1T m=1
+C3 o3 GND 10f m=1
+**** begin user architecture code
+.lib /home/amedcalf/open-asic/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+
+
+.param VLL=-3.8
+.param VDD=1.8
+.param VSS=0
+.param VLH=0
+.param VHH=6.7
+.param VINT={(VHH+VLL)/2}
+.option savecurrents
+.control
+  save all
+  op
+  remzerovec
+  write test-hvswcases.raw
+  set appendwrite
+  tran 100p 20n uic
+  remzerovec
+  write test-hvswcases.raw
+.endc
+
+
+
+
+
+.ic v(o1)={VHH} v(a1)={VSS}
+.ic v(c1)={(VHH+VSS)/2}
+
+
+
+
+.ic v(o2)={VLL} v(a2)={VSS} v(b2)={VLL}
+.ic v(c2)={(VLL+VSS)/2}
+
+
+
+
+.ic v(o3)={VDD} v(a2)={VSS} v(b2)={VSS}
+.ic v(c2)={(VDD+VSS)/2}
+
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+.end
